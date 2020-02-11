@@ -19,9 +19,14 @@ class SpringPoCApplication {
 	fun myProps() = MyProps()
 
 	@Bean
-	fun cmd(myProps: MyProps, otherProps: MyProps) = CommandLineRunner {
+	@ConfigurationProperties("app.props")
+	fun mapProps() = HashMap<String, String>()
+
+	@Bean
+	fun cmd(myProps: MyProps, otherProps: MyProps, mapProps: Map<String, String>) = CommandLineRunner {
 		println("myProps name = ${myProps.name}")
 		println("otherProps name = ${otherProps.name}")
+		println("mapProps name = $mapProps")
 	}
 }
 
